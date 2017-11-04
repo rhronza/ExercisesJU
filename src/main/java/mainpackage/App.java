@@ -2,7 +2,7 @@ package mainpackage;
 
 /**
  * cvičení Java University ....
- *
+ * jedná se o samostatná cvičení, která provádím na základě toho co bylo probíráno v lekcích
  */
 public class App 
 {
