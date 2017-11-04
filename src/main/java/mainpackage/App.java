@@ -1,7 +1,7 @@
 package mainpackage;
 
 /**
- * cvičení Java University
+ * cvičení Java University ....
  *
  */
 public class App 
