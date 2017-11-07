@@ -17,8 +17,15 @@ public class CalendarRhr {
 		Calendar cal = Calendar.getInstance();
 		cal.clear();
 		System.out.println(cal);
-		DateFormat dateFormat = new SimpleDateFormat("d.MMMM.yyyy HH:MM:SS");
-		System.out.println("Calendar: "+dateFormat.format(cal.getTime()));
+		DateFormat dateFormat1 = new SimpleDateFormat("d.MMMM.yyyy HH:MM:SS");
+		System.out.println("Calendar1: "+dateFormat1.format(cal.getTime()));
+		DateFormat dateFormat2 = new SimpleDateFormat("dd.MM.yyyy HH:MM:SS");
+		System.out.println("Calendar2: "+dateFormat2.format(cal.getTime()));
+		cal.add(Calendar.MONTH,+1);
+		cal.add(Calendar.DAY_OF_MONTH,8);
+		System.out.println("Calendar3: "+dateFormat1.format(cal.getTime()));
+		
+		
 		
 		Calendar cal2 = Calendar.getInstance();
 		cal2.clear();
@@ -29,7 +36,6 @@ public class CalendarRhr {
 		System.out.println("Počet vteřin: "+pocetMiliSekundDoTed);
 		
 		//long pocetMiliSekundKonecRoku = new Date(17,12,31); // zastaralé
-		long pocetMiliSekundKonecRoku = new setTime(1000000);
 		
 		
 		
