@@ -72,7 +72,7 @@ public class CalendarRhr {
 		
 		/* počet milisekund od 1.1.1970 */
 		long pocetMiliSekundDoTed = new Date().getTime(); 
-		System.out.println("\nPočet vteřin: "+pocetMiliSekundDoTed);
+		System.out.println("\nPočet vteřin: "+pocetMiliSekundDoTed+"\n");
 		
 		//long pocetMiliSekundKonecRoku = new Date(17,12,31); // zastaralé
 		
@@ -82,11 +82,15 @@ public class CalendarRhr {
 		
 		/* třídy LocalDate, LocalDateTime, LocalTime */
 		LocalDateTime dateToday = LocalDateTime.now();
-		LocalDate localDate = dateToday.toLocalDate();
-		LocalTime localTime = dateToday.toLocalTime();
+		//LocalDate localDate = dateToday.toLocalDate();
+		//LocalTime localTime = dateToday.toLocalTime();
 		System.out.println("Dnes:"+ dateToday);
-		System.out.println("Dnešní datum: "+localDate);
-		System.out.println("Aktuální čas: "+localTime);
+		System.out.println("Dnešní datum: "+dateToday.toLocalDate());
+		System.out.println("Aktuální čas: "+dateToday.toLocalTime());
+		dateToday = LocalDateTime.of(2015, 9, 21, 15, 0,23);
+		System.out.println("Jiný datum je :"+ dateToday);
+		dateToday = LocalDateTime.of(0, 1, 1, 0, 0,0);
+		System.out.println("Jiný datum je :"+ dateToday);
 		
 		
 	}
