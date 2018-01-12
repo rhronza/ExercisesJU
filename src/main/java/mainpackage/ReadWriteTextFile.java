@@ -20,7 +20,7 @@ public class ReadWriteTextFile {
 	
 	try 
 	{
-		    BufferedWriter bw = new BufferedWriter(new FileWriter("soubor.txt"));
+		    BufferedWriter bw = new BufferedWriter(new FileWriter("txt/soubor.txt"));
 	        Date datumCas = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 	        bw.write(sdf.format(datumCas)+": "+"ZAČÁTEK BĚHU PROGRAMU");
@@ -58,7 +58,7 @@ public class ReadWriteTextFile {
 	public static void readTextFile() {
 	try 
 	{
-			BufferedReader br = new BufferedReader(new FileReader("soubor.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("txt/soubor.txt"));
 	        String s;
 	        while ((s = br.readLine()) != null)
 	        {

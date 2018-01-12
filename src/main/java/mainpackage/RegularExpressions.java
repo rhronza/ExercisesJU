@@ -42,5 +42,13 @@ public class RegularExpressions {
 			System.out.println(s);
 		}
 		
+		System.out.println("*************************************************");
+		String s = "1 498,00";
+		String s2 = s.replaceAll("[\\s]", ""); // odstranění mezery z řetezce
+		s2 = s2.replaceAll(",", ".");
+		System.out.println("s2: "+s2 );
+		
+	
+		
 	}
 }
