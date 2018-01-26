@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VelikostBaleni {
+public class Produkt {
 
-	public VelikostBaleni() {
+	public Produkt() {
 		List<String> seznam = new ArrayList<String>();
 		seznam.add("Neutrogena Tělové mléko pro suchou pokožku 400ml");
 		seznam.add("Muumi Baby Jednorázové dětské bio pleny Maxi+ S5 10-16kg/22ks");
 		seznam.add("Beemy zavinovačka LIGHT STARS GREY warm"); // 1ks
 		seznam.add("Beemy bryndáček/slintáček 2 ks Baby pink-purple");
-		seznam.add("Vinný Dům Alibernet 2015 výběr z hroznů 0,75l");
+		seznam.add("Vinný Dům Alibernet 2015 výběr z hroznů 0,75 l");
 		seznam.add("Beemy froté osuška 100x100cm PEPE"); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		seznam.add("Coca - cola sklo 24 x 11ml");
 		seznam.add("Coca - cola sklo 24x200ml");
@@ -43,7 +43,7 @@ public class VelikostBaleni {
 				pattern = Pattern.compile("(\\D\\d(ks|ml|l|g|kg|mg))");
 				matcher = pattern.matcher(s);
 				if (matcher.find()) {
-					velikostBaleniString=matcher.group(1).replaceAll("[\\D]", "");
+					velikostBaleniString = matcher.group(1).replaceAll("[\\D]", "");
 					velikostBaleniFloat = Float.parseFloat(velikostBaleniString);
 					System.out.println("9:" + s + ":" + velikostBaleniFloat + ", ");
 				} else {
@@ -53,7 +53,7 @@ public class VelikostBaleni {
 						velikostBaleniString = matcher.group(1);
 						poleStringu = velikostBaleniString.split(" ");
 						velikostBaleniFloat = Float.parseFloat(poleStringu[0]) * Float.parseFloat(poleStringu[2]);
-						System.out.println("A:" + s + ":" + velikostBaleniFloat + ", "+velikostBaleniString );
+						System.out.println("A:" + s + ":" + velikostBaleniFloat + ", " + velikostBaleniString);
 					} else {
 						pattern = Pattern.compile("(\\d+x\\d+)+");
 						matcher = pattern.matcher(s);
@@ -74,8 +74,13 @@ public class VelikostBaleni {
 					}
 				}
 			}
+			String[] poleSlov = s.split(" ");
+//			System.out.println("\n"+s);
+			for (int i = 0; i < poleSlov.length; i++) {
+				System.out.println(poleSlov[i]);
+			}
+			System.out.println("\n");
 		}
 
 	}
-
 }

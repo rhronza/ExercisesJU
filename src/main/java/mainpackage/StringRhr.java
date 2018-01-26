@@ -47,7 +47,7 @@ public class StringRhr {
 		
 		String s4 = "Ahoj jak se máš? Ahoj.";
 		System.out.println("s4:"+s4);
-		System.out.println("indexOf (Ahoj):"+s4.indexOf("Ahoj"));
+		System.out.println("indexOf (jak):"+s4.indexOf("jak"));
 		System.out.println("indexOf (Ahoj999) - neobsahuje:"+s4.indexOf("Ahoj999"));
 		System.out.println("lastIndexOf (Ahoj):"+ s4.lastIndexOf("Ahoj"));
 		System.out.println("lastIndexOf (Ahoj999)- neobsahuje:"+s4.lastIndexOf("Ahoj999"));
@@ -90,6 +90,16 @@ public class StringRhr {
 		System.out.println(a+", "+a.isEmpty());
 		a="   ".trim();
 		System.out.println(a.isEmpty());
+		System.out.println("********************************************************");
+		String cena = "29,80 Kč / ml ";
+		String[] pole = cena.replaceAll(" ", "").replaceAll(",", ".").split("Kč/");
+		for (String ss: pole) {
+			System.out.println(ss);
+		}
+		System.out.println(pole[0]);
+		System.out.println(pole[1]);
+		System.out.println(pole);
+		
 		
 		
 		

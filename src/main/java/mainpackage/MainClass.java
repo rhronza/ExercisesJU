@@ -18,12 +18,15 @@ public class MainClass
     	
     	//RegularExpressions regularExpressions= new RegularExpressions();
     	//StringRhr stringRhr = new StringRhr();
-    	RegExpressioRhr regExpressioRhr =  new RegExpressioRhr();
-    	VelikostBaleni baleni = new VelikostBaleni();
+    	//RegExpressioRhr regExpressioRhr =  new RegExpressioRhr();
+    	//Produkt baleni = new Produkt();
     	//CalendarDateRhr calendarRhr = new CalendarDateRhr();
     	//Rekurze rekurze = new Rekurze();
     	//Polymorfismus p = new Polymorfismus();
+    	//VelikostBaleni2 velikostBaleni2 =  new VelikostBaleni2();
     	//ListRhr listRhr = new ListRhr();
+    	//OuterLoopBreakToo oouterLoopBreakToo = new OuterLoopBreakToo();
+    	PorovnaniProduktu_1 regExpressioRhr2 =  new PorovnaniProduktu_1();
         
     }
 }
