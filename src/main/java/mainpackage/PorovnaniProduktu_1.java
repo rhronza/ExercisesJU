@@ -67,7 +67,7 @@ public class PorovnaniProduktu_1 {
 		int indexRateParity = 0; // počet shod připorovnání slov jednoho PP a jednoho PS
 	
 		float maxRateParity = 0f; // maximální shod
-		int indexMaxRateParity = 0; // index řádku s maximální shodou s PP a PS
+		int indexMaxRateParity = -1; // index řádku s maximální shodou s PP a PS
 		
 		System.out.println("PP:"+vendorProduct+"\n");
 		
