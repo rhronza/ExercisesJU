@@ -26,7 +26,8 @@ public class MainClass
     	//VelikostBaleni2 velikostBaleni2 =  new VelikostBaleni2();
     	//ListRhr listRhr = new ListRhr();
     	//OuterLoopBreakToo oouterLoopBreakToo = new OuterLoopBreakToo();
-    	PorovnaniProduktu_1 regExpressioRhr2 =  new PorovnaniProduktu_1();
-        
+    	//PorovnaniProduktu_1 regExpressioRhr2 =  new PorovnaniProduktu_1();
+//    	CallingFunctionParametr callingFunctionParametr = new CallingFunctionParametr();
+    	EscapeChars escapeChars = new EscapeChars();
     }
 }
