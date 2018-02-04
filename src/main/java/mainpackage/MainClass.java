@@ -16,9 +16,10 @@ public class MainClass
         //ReadWriteTextFile.readTextFile();
         
     	
-    	//RegularExpressions regularExpressions= new RegularExpressions();
+    	StandardizaceNázvu sn = new StandardizaceNázvu();
+    	System.out.println("*****************************************\n\n");
     	//StringRhr stringRhr = new StringRhr();
-    	//RegExpressioRhr regExpressioRhr =  new RegExpressioRhr();
+    	RegExpressioRhr regExpressioRhr =  new RegExpressioRhr();
     	//Produkt baleni = new Produkt();
     	//CalendarDateRhr calendarRhr = new CalendarDateRhr();
     	//Rekurze rekurze = new Rekurze();
@@ -28,6 +29,6 @@ public class MainClass
     	//OuterLoopBreakToo oouterLoopBreakToo = new OuterLoopBreakToo();
     	//PorovnaniProduktu_1 regExpressioRhr2 =  new PorovnaniProduktu_1();
 //    	CallingFunctionParametr callingFunctionParametr = new CallingFunctionParametr();
-    	EscapeChars escapeChars = new EscapeChars();
+    	//EscapeChars escapeChars = new EscapeChars();
     }
 }

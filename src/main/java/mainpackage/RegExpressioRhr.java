@@ -9,12 +9,12 @@ public class RegExpressioRhr {
 		System.out.println("********************************************************");
 		String regex = "[0-9]+";
 		String data = "23343453";
-		System.out.println(data.matches(regex));
+		System.out.println(data+": "+data.matches(regex));
 		System.out.println("********************************************************");
 //		String s222="Coca - cola Zero sklo  24 x 200ml)";
-		String s222="Toro Houbička na nádobí kulatá „Smajlík” 79x30mm, 6ks";
-		String regExpr = "[0-9a-zA-Z\\s\\-()]+";
-		System.out.println("matches: "+s222.matches(regExpr));
+		String s222="Toro Houbička na nádobí kulatá „Smajlík” 79 x 30mm, 6ks";
+		String regExpr = "(\\sx\\s)";
+		System.out.println(s222+":"+s222.matches(regExpr));
 //		String regExpr2 = "(\\d)(\\s)x(\\s)(\\d)w+";
 		String regExpr2 = "(\\d\\sx\\s\\d)+";
 		String regExpr3 = "(\\dx\\d)+";
