@@ -32,9 +32,11 @@ public class StringRhr {
 		*/
 		
 		/* a nebo to udělat rovnou celé */
-		System.out.println(sRow.indexOf(distinctiveStringLeft));
-		System.out.println(distinctiveStringLeft.length());
-		System.out.println(sRow.lastIndexOf(distinctiveStringRight));
+		System.out.println("extrakce:"+sRow);
+		System.out.println("extrakce:"+distinctiveStringLeft);
+		System.out.println("extrakce:"+sRow.indexOf(distinctiveStringLeft));
+		System.out.println("extrakce:"+distinctiveStringLeft.length());
+		System.out.println("extrakce:"+sRow.lastIndexOf(distinctiveStringRight));
 		
 		sPrice = sRow.substring(sRow.indexOf(distinctiveStringLeft)+distinctiveStringLeft.length(),sRow.lastIndexOf(distinctiveStringRight));
 		
@@ -87,9 +89,9 @@ public class StringRhr {
 		System.out.println("********************************************************");
 		String a = "1";
 		a = a + "2";
-		System.out.println(a+", "+a.isEmpty());
-		a="   ".trim();
-		System.out.println(a.isEmpty());
+		System.out.println("empty: "+a+", "+a.isEmpty());
+		a="   "/*.trim()*/;
+		System.out.println("empty string all spaces="+a.isEmpty());
 		System.out.println("********************************************************");
 		String cena = "29,80 Kč / ml ";
 		String[] pole = cena.replaceAll(" ", "").replaceAll(",", ".").split("Kč/");

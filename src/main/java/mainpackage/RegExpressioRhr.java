@@ -29,6 +29,8 @@ public class RegExpressioRhr {
 		if (s222.contains(" x ")) {
 			System.out.println("obsahuje");
 		} else System.out.println("NEOBSAHUJE");
+
+		System.out.println("********************************************************");
 		
 		System.out.println(s222);
 		String lastWord = s222.substring(s222.lastIndexOf(" ")+1);
