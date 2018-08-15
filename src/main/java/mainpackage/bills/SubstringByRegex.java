@@ -1,4 +1,4 @@
-package mainpackage;
+package mainpackage.bills;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ public class SubstringByRegex {
 
 	public SubstringByRegex() {
 		firstExtract();
-//		billaExtract();
+		// billaExtract();
 	}
 
 	private void firstExtract() {
@@ -29,10 +29,12 @@ public class SubstringByRegex {
 		System.out.println("");
 		System.out.println("druhý:");
 		String mydata2 = "some 999 string with 'the 66data i want' inside";
-		Pattern pattern2 = Pattern.compile("\\s(.*?)\\s");
+		Pattern pattern2 = Pattern.compile("\\s(.*?)\\s(.*?)\\s");
 		Matcher matcher2 = pattern2.matcher(mydata2);
 		if (matcher2.find()) {
+			System.out.println(mydata2);
 			System.out.println(matcher2.group(1));
+			System.out.println(matcher2.group(2));
 		}
 
 		/* od začátku do 66 */
@@ -57,7 +59,7 @@ public class SubstringByRegex {
 
 		/* POKUS HOKUS */
 		System.out.println("");
-		System.out.println("hokus pokus:");
+		System.out.println("hokus pokus2:");
 		System.out.println("===========");
 
 		String paternStringNameProduct = "(.*?)\\s[BC]\\s+-?\\d+\\.\\d{2}$";
@@ -65,7 +67,7 @@ public class SubstringByRegex {
 		Pattern patternNameProduct = Pattern.compile(paternStringNameProduct);
 		Pattern patternPrice = Pattern.compile(paternStringPrice);
 
-		//String receiptRow = "JOGURT bíly borůvkový     B     -124.92"; //
+		// String receiptRow = "JOGURT bíly borůvkový B -124.92"; //
 		String receiptRow = "fff C -124.92"; //
 
 		System.out.println("input  =" + receiptRow);
@@ -76,6 +78,16 @@ public class SubstringByRegex {
 			System.out.println("Regex   =\"" + matcherNameProduct.pattern() + "\"");
 			System.out.println("Price   =\"" + matcherPrice.group(1) + "\"");
 			System.out.println("Regex   =\"" + matcherPrice.pattern() + "\"");
+		}
+
+		/* od adresa obchodu */
+		System.out.println("");
+		System.out.println("adresa obchodu:");
+		String input = "ALBERT 604\r\n" + "Sídlo plátce dané :\r\n" + "Radlická 520/117 158 00 Praha 5-Jinonice \r\n" + "DIC : CZ44012373 ICO : 44012373 ";
+		Pattern patternShop = Pattern.compile("S.dlo pl.tce dan.\\s:(.*?)DIC\\s:\\sCZ", Pattern.DOTALL);
+		Matcher matcherShop = patternShop.matcher(input);
+		if (matcherShop.find()) {
+			System.out.println(matcherShop.group(1));
 		}
 	}
 
@@ -115,12 +127,7 @@ public class SubstringByRegex {
 
 			String rowPaternString = "(.*?)\\s[BC]\\s+-?\\d+\\.\\d{2}$";
 			/*
-			 * popis regex: hledám skupinu kde můžou být znaky všechny: ((.*?) 
-			 * pak právě jedna mezera: \\s 
-			 * pak B nebo C: [BC] mezera 1..N krát: \\s+ 
-			 * pak znaménko minus: 0..1 krát: -? 
-			 * pak desetinná číslice 1..N krát: \\d+ 
-			 * pak tečka: \\. pak
+			 * popis regex: hledám skupinu kde můžou být znaky všechny: ((.*?) pak právě jedna mezera: \\s pak B nebo C: [BC] mezera 1..N krát: \\s+ pak znaménko minus: 0..1 krát: -? pak desetinná číslice 1..N krát: \\d+ pak tečka: \\. pak
 			 * právě 2 číslice: \\d{2} a to vše na konci: $
 			 */
 
@@ -140,6 +147,5 @@ public class SubstringByRegex {
 			}
 
 		}
-
 	}
 }

@@ -13,16 +13,16 @@ public class CalendarDateRhr2dates {
 		Date dateStart = new Date();
 		
 		for (int i = 0; i < 1000; i++) {
-			System.out.println("něco dělám");
+			System.out.print("něco dělám");
 		}
 
 		Date dateFinish = new Date();
 		
 		DateFormat dateFormat = new SimpleDateFormat("EEE dd.MM.yyyy HH:mm:ss.SSS");
 		
-		System.out.println("");
-		System.out.println("Datum start : "+dateFormat.format(dateStart));
-		System.out.println("Datum finish: "+dateFormat.format(dateFinish));
+		System.out.println("Něco jsem dodělal...");
+		System.out.println("Datum start : "+dateFormat.format(dateStart)+", miliseconds="+dateStart.getTime());
+		System.out.println("Datum finish: "+dateFormat.format(dateFinish)+", miliseconds="+dateFinish.getTime());
 		long duration = dateFinish.getTime() - dateStart.getTime();
 		System.out.println("duration in miliseconds = " + duration);
 		

@@ -1,4 +1,4 @@
-package mainpackage;
+package mainpackage.bills;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +16,7 @@ import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-public class Receipts {
+public class Bill {
 
 	/* pdfBox classes: */
 	private PDFParser pdfParser;
@@ -25,17 +25,35 @@ public class Receipts {
 	private COSDocument cosDoc = null;;
 
 	/* seznam účtenek */
-	private List<String> receiptsNameFiles = new ArrayList<>();
+	private List<String> billsNameFiles = new ArrayList<>();
 
-	/* jména obchodů */
-	private List<ShopPatern> shopNames = new ArrayList<>();
+	/* paterny obchodů */
+	private List<ShopPaterns> shopPaternsList = new ArrayList<>();
 
-	class ShopPatern {
+	/* adresy obchodů */
+	List<String> shopAddresses = new ArrayList<>();
+
+	/* názvy obchodů */
+	List<String> shopNameList = new ArrayList<>();
+
+	class ShopPaterns {
 		String shopName;
 		Pattern nameShopPattern;
 		Pattern dataGroupPattern;
 		Pattern nameproductPattern;
 		Pattern pricePattern;
+		Pattern addressPatern;
+
+		
+		public ShopPaterns(String shopName, Pattern nameShopPattern, Pattern dataGroupPattern, Pattern nameproductPattern, Pattern pricePattern, Pattern addressPatern) {
+			super();
+			this.shopName = shopName;
+			this.nameShopPattern = nameShopPattern;
+			this.dataGroupPattern = dataGroupPattern;
+			this.nameproductPattern = nameproductPattern;
+			this.pricePattern = pricePattern;
+			this.addressPatern = addressPatern;
+		}
 
 		public String getShopName() {
 			return shopName;
@@ -57,50 +75,28 @@ public class Receipts {
 			return pricePattern;
 		}
 
-		public void setShopName(String shopName) {
-			this.shopName = shopName;
+
+		public Pattern getAddressPatern() {
+			return addressPatern;
 		}
 
-		public void setNameShopPattern(Pattern nameShopPattern) {
-			this.nameShopPattern = nameShopPattern;
-		}
 
-		public void setDataGroupPattern(Pattern dataGroupPattern) {
-			this.dataGroupPattern = dataGroupPattern;
-		}
-
-		public void setNameproductPattern(Pattern nameproductPattern) {
-			this.nameproductPattern = nameproductPattern;
-		}
-
-		public void setPricePattern(Pattern pricePattern) {
-			this.pricePattern = pricePattern;
-		}
-
-		public ShopPatern(String shopName, Pattern nameShopPattern, Pattern dataGroupPattern, Pattern nameproductPattern, Pattern pricePattern) {
-			super();
-			this.shopName = shopName;
-			this.nameShopPattern = nameShopPattern;
-			this.dataGroupPattern = dataGroupPattern;
-			this.nameproductPattern = nameproductPattern;
-			this.pricePattern = pricePattern;
-		}
 
 	}
 
-	public Receipts() {
+	public Bill() {
 
 		initLists();
 
-		runReceiptsProcessing();
+		runBillsProcessing();
 
 	}
 
-	private String toText(String nameFile) {
+	private String pdfToText(String nameFile) {
 		File file;
-		String receiptContent = "";
+		String billContent = "";
 		file = new File(nameFile);
-		List<String> listOFRows = new ArrayList<>();
+		//List<String> listOFRows = new ArrayList<>();
 		try {
 			this.pdfParser = new PDFParser(new RandomAccessFile(file, "r"));
 			pdfParser.parse();
@@ -113,7 +109,7 @@ public class Receipts {
 			pdfTextStripper.setStartPage(1);
 			pdfTextStripper.setEndPage(pdDoc.getNumberOfPages());
 
-			receiptContent = pdfTextStripper.getText(pdDoc);
+			billContent = pdfTextStripper.getText(pdDoc);
 			// listOFRows = pdfTextStripper.get
 
 		} catch (FileNotFoundException e) {
@@ -123,109 +119,68 @@ public class Receipts {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // update for PDFBox V 2.0
-		return receiptContent;
+		return billContent;
 	}
 
-	private void initLists() {
-		// receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180712_112241.PDF");
-		// receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180712_112339.PDF");
-		// receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180712_112346.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180715_163718.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180715_163718_portrait.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180716_201550.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180716_201550_portrait.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180716_201550_portrait_small.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180717_095109.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180717_095126.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180717_095126_portrait.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\TheBest.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\Ahold_OK.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\Albert1.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\Albert2.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\Billa_Crumpled.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\IMG_20180716_201550_portrait_small.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\OK2.PDF");
-		// receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\trojica1.PDF");
-		// receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\trojica2.PDF");
-		// receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\trojica3.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\20180712_143649.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\20180712_143652.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\20180712_143656.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\IMG_20180717_120440.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\IMG_20180717_120444.PDF");
-		receiptsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\IMG_20180717_120448.PDF");
+	private void runBillsProcessing() {
+		String contentCurrenBill = "";
 
-		// shopNames.add(new ShopPatern("AHOLD", Pattern.compile("AHOLD CZECH REPUBLIC a.s."), Pattern.compile(""), Pattern.compile("")));
-		// shopNames.add(new ShopPatern("BILLA", Pattern.compile("BILLA, SPOL. S R.O."), Pattern.compile(""), Pattern.compile("")));
-
-		shopNames.add(new ShopPatern("AHOLD", 	Pattern.compile("ahold", Pattern.DOTALL), null, null, null));
-		
-		shopNames.add(new ShopPatern("ALBERT", 	Pattern.compile("albert", Pattern.DOTALL), 
-												Pattern.compile("Zbozi CZK/Jed Hnoz Suma CZK(.*?)Cena celkem", Pattern.DOTALL), 
-												Pattern.compile("\\d{2}\\.\\d(.*?)\\d*\\s-?\\d+\\.\\d{2}$"), 
-												Pattern.compile("\\s+(-?\\d+\\.\\d{2}$)")));
-		
-		shopNames.add(new ShopPatern("BILLA", 	Pattern.compile("billa", Pattern.DOTALL), 
-												Pattern.compile("Čas:\\s\\d\\d:\\d\\d:\\d\\d(.*?)Celkem", Pattern.DOTALL), 
-												Pattern.compile("(.*?)\\s[BC]\\s+-?\\d+\\.\\d{2}$"),
-												Pattern.compile("\\s+(-?\\d+\\.\\d{2}$)")));
-		
-		shopNames.add(new ShopPatern("BEO", Pattern.compile("beo restaurace", Pattern.DOTALL), null, null, null));
-		
-		shopNames.add(new ShopPatern("rohlik.cz", Pattern.compile("rohlik", Pattern.DOTALL), null, null, null));
-
-	}
-
-	private void runReceiptsProcessing() {
-		String contentCurrenReceipt = "";
-
-		List<String> currentReceiptList = new ArrayList<>();
+		//List<String> currentBillList = new ArrayList<>();
 		Matcher m;
 
 		int idx = 0;
 		int finded = 0;
 		/* procházení seznamu souborů */
-		for (String receiptNameFile : receiptsNameFiles) {
+		for (String billNameFile : billsNameFiles) {
 			idx++;
 			System.out.println("=====================================================================");
-			System.out.println("   " + idx + ":" + receiptNameFile);
+			System.out.println("   " + idx + ":" + billNameFile);
 			System.out.println("=====================================================================");
-			contentCurrenReceipt = toText(receiptNameFile);
+			contentCurrenBill = pdfToText(billNameFile);
 
 			/* procházím seznam obchodů */
-			overloop: for (ShopPatern shopPatern : shopNames) {
-				// m = shopPatern.getPatternNameShop().matcher(receiptRow);
-				m = shopPatern.getNameShopPattern().matcher(contentCurrenReceipt.toLowerCase());
+			overloop: for (ShopPaterns shopPatern : shopPaternsList) {
+				System.out.println("aktuálně kontrolovaný obchod:"+shopPatern.getShopName());
+				// m = shopPatern.getPatternNameShop().matcher(billRow);
+				m = shopPatern.getNameShopPattern().matcher(contentCurrenBill.toLowerCase());
 				if (m.find()) {
 					finded++;
 					System.out.println("    +--------------------------------------------------------");
 					System.out.println("    |  Účtenka je z:" + shopPatern.getShopName());
 					System.out.println("    +--------------------------------------------------------");
+
+					if (shopPatern.getAddressPatern() != null) {
+						Matcher mAddress = shopPatern.getAddressPatern().matcher(contentCurrenBill);
+						if (mAddress.find()) {
+							System.out.println("Adresa shopu je:" + mAddress.group(1));
+						} else
+							System.out.println("Adresa nenalazena");
+					}
+
 					if (shopPatern.getDataGroupPattern() != null) {
-						Matcher dataGroupMatcher = shopPatern.getDataGroupPattern().matcher(contentCurrenReceipt);
+						Matcher dataGroupMatcher = shopPatern.getDataGroupPattern().matcher(contentCurrenBill);
 						if (dataGroupMatcher.find()) {
-							String receiptDataGroup = dataGroupMatcher.group(1);
+							String billtDataGroup = dataGroupMatcher.group(1);
 							System.out.println("");
 							System.out.println("*****  DataGroup start *****");
-							System.out.println(receiptDataGroup);
+							System.out.println(billtDataGroup);
 							System.out.println("*****  DataGroup konec *****");
 							System.out.println("");
-							List<String> receiptRows = new ArrayList<>(Arrays.asList(receiptDataGroup.split("\\r?\\n")));
+							List<String> billRows = new ArrayList<>(Arrays.asList(billtDataGroup.split("\\r?\\n")));
 							System.out.println("");
 							System.out.println("******************* Vytěžená data start ****************************");
-							for (String receiptRow : receiptRows) {
-								Matcher productNameMatcher = shopPatern.getNameproductPattern().matcher(receiptRow);
-								Matcher priceMatcher = shopPatern.getPricePattern().matcher(receiptRow);
+							for (String billRow : billRows) {
+								Matcher productNameMatcher = shopPatern.getNameproductPattern().matcher(billRow);
+								Matcher priceMatcher = shopPatern.getPricePattern().matcher(billRow);
 								if (productNameMatcher.find() && priceMatcher.find()) {
 									String nameProduct = productNameMatcher.group(1);
 									String priceString = priceMatcher.group(1);
 									if (!priceString.isEmpty()) {
 										Float price = Float.parseFloat(priceString);
 										Float priceMultiplied = price * 1.1f;
-										System.out.println("     Název produktu="+nameProduct+", cena="+price+", cena x 1,1="+priceMultiplied);
+										System.out.println("     Název produktu=" + nameProduct + ", cena=" + price + ", cena x 1,1=" + priceMultiplied);
 									}
 								}
-								
 							}
 							System.out.println("******************* Vytěžená data konec ****************************");
 						}
@@ -235,7 +190,7 @@ public class Receipts {
 			}
 			System.out.println("");
 			System.out.println("-------------------  DATOVÁ VRSTVA START ------------------------------------");
-			System.out.println(contentCurrenReceipt);
+			System.out.println(contentCurrenBill);
 			System.out.println("-------------------  DATOVÁ VRSTVA KONEC ------------------------------------");
 			System.out.println("");
 		}
@@ -246,4 +201,54 @@ public class Receipts {
 		System.out.println("*******************************************");
 
 	}
+
+	private void initLists() {
+		
+		
+		// billNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180712_112241.PDF");
+		// billNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180712_112339.PDF");
+		// billNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180712_112346.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180715_163718.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180715_163718_portrait.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180716_201550.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180716_201550_portrait.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180716_201550_portrait_small.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180717_095109.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180717_095126.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\IMG_20180717_095126_portrait.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\TheBest.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\Ahold_OK.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\Albert1.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\Albert2.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\Billa_Crumpled.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\IMG_20180716_201550_portrait_small.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\OK2.PDF");
+		// billNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\trojica1.PDF");
+		// billNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\trojica2.PDF");
+		// billNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\history\\trojica3.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\20180712_143649.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\20180712_143652.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\20180712_143656.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\IMG_20180717_120440.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\IMG_20180717_120444.PDF");
+//		billsNameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\pdf\\billa_vojta\\IMG_20180717_120448.PDF");
+		billsNameFiles.add("C:\\Users\\roman\\Disk Google\\104_Srovnavač hladu\\99_uctenky\\01_new jpg\\naskenováno_20180720-1303.pdf");
+
+		// shopNames.add(new ShopPatern("AHOLD", Pattern.compile("AHOLD CZECH REPUBLIC a.s."), Pattern.compile(""), Pattern.compile("")));
+		// shopNames.add(new ShopPatern("BILLA", Pattern.compile("BILLA, SPOL. S R.O."), Pattern.compile(""), Pattern.compile("")));
+
+		shopPaternsList.add(new ShopPaterns("AHOLD", Pattern.compile("ahold", Pattern.DOTALL), null, null, null, null));
+
+		shopPaternsList.add(new ShopPaterns("ALBERT", Pattern.compile("albert", Pattern.DOTALL), Pattern.compile("Zbozi CZK/Jed Hnoz Suma CZK(.*?)Cena celkem", Pattern.DOTALL), Pattern.compile("\\d{2}\\.\\d(.*?)\\d*\\s-?\\d+\\.\\d{2}$"),
+				Pattern.compile("\\s+(-?\\d+\\.\\d{2}$)"), Pattern.compile("S.dlo pl.tce dan.\\s:(.*?)DIC\\s:\\sCZ", Pattern.DOTALL)));
+
+		shopPaternsList.add(new ShopPaterns("BILLA", Pattern.compile("billa", Pattern.DOTALL), Pattern.compile("Čas:\\s\\d\\d:\\d\\d:\\d\\d(.*?)Celkem", Pattern.DOTALL), Pattern.compile("(.*?)\\s[BC]\\s+-?\\d+\\.\\d{2}$"),
+				Pattern.compile("\\s+(-?\\d+\\.\\d{2}$)"), null));
+
+		shopPaternsList.add(new ShopPaterns("BEO", Pattern.compile("beo restaurace", Pattern.DOTALL), null, null, null, null));
+
+		shopPaternsList.add(new ShopPaterns("rohlik.cz", Pattern.compile("rohlik", Pattern.DOTALL), null, null, null, null));
+
+	}
+
 }

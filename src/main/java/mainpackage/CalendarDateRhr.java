@@ -17,6 +17,7 @@ public class CalendarDateRhr {
 			Calendar calendarToday = Calendar.getInstance();
 		/*Inicializace Date */
 			Date dateToday = new Date();
+			System.out.println("teď je (java.util.Date):"+dateToday);
 			/* nebo rovnou inicializovat z Calendar: */
 			//Date dateToday =calendarToday.getTime();
 		/* převod z Calendar na Date - dělá se přes getTime()*/

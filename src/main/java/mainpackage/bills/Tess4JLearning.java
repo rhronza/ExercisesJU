@@ -1,7 +1,6 @@
-package mainpackage;
+package mainpackage.bills;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +15,14 @@ public class Tess4JLearning {
 		tesseract.setLanguage("ces");
 
 		List<String> nameFiles = new ArrayList<>();
-		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180717_095109.jpg");
-		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180717_095126.jpg");
-		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180717_095126_portrait.jpg");
+		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\img\\billa_vojta\\A3.jpg");
+//		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180717_095126.jpg");
+//		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180717_095126_portrait.jpg");
 //		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180716_201550_portrait_small.jpg");
 //		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180716_201550_portrait.jpg");
 //		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\TheBest.jpg");
 //		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180715_163718_portrait.jpg");
-//		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180712_112339.jpg");
+//		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\img\\IMG_20180712_112339.jpg");
 //		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180712_112241.jpg");
 //		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180712_112346.jpg");
 //		nameFiles.add("C:\\uctenky\\tenkystextovouvrstvou\\IMG_20180715_163718.jpg");

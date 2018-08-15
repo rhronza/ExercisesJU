@@ -125,19 +125,19 @@ public class ShoppingListService {
 	}
 
 	class ProductGroupToFrontEnd {
-		private Integer pgid;
+		private Integer pgId;
 		private String namePG;
 		List<ShoppingIcon> shoppingIcons;
 
 		public ProductGroupToFrontEnd(Integer pgid, String namePG, List<ShoppingIcon> shoppingIcons) {
 			super();
-			this.pgid = pgid;
+			this.pgId = pgid;
 			this.namePG = namePG;
 			this.shoppingIcons = shoppingIcons;
 		}
 
-		public Integer getPgid() {
-			return pgid;
+		public Integer getPgId() {
+			return pgId;
 		}
 
 		public String getNamePG() {
@@ -148,8 +148,8 @@ public class ShoppingListService {
 			return shoppingIcons;
 		}
 
-		public void setPgid(Integer pgid) {
-			this.pgid = pgid;
+		public void setPgId(Integer pgid) {
+			this.pgId = pgid;
 		}
 
 		public void setNamePG(String namePG) {
@@ -162,7 +162,7 @@ public class ShoppingListService {
 
 		@Override
 		public String toString() {
-			return "ProductGroup [pgid=" + pgid + ", namePG=" + namePG + ", shoppingIcons=" + shoppingIcons + "]";
+			return "ProductGroup [pgid=" + pgId + ", namePG=" + namePG + ", shoppingIcons=" + shoppingIcons + "]";
 		}
 
 	}
@@ -178,8 +178,8 @@ public class ShoppingListService {
 			System.out.println("se NErovnají");
 		}
 
-		//orderedInput();
-		nonOrderedInput();
+		orderedInput();
+		// nonOrderedInput();
 
 	}
 
@@ -201,7 +201,7 @@ public class ShoppingListService {
 		shoppingItems.add(new ShoppingItem(null, "", null, "kaviár", 999.91f));
 		shoppingItems.add(new ShoppingItem(-1, "", null, "jogurt yoplat Kosik.cz", 1.11f));
 		shoppingItems.add(new ShoppingItem(-1, "", 118, "jogurt yoplat itesco.cz", 22.44f));
-		shoppingItems.add(new ShoppingItem(-1, "", 120, "cigaretz Marlboro", 28.90f));
+		shoppingItems.add(new ShoppingItem(-1, "", 120, "cigarety Marlboro", 28.90f));
 
 		Integer lastProductGropupId = null;
 		Integer lastProductId = null;
@@ -224,7 +224,7 @@ public class ShoppingListService {
 		System.out.println("productGroupsToFrontEnd - OrderedInput");
 		System.out.println("---------------------------------------------------------------------------------");
 		for (ProductGroupToFrontEnd productGroupToFrontEnd : productGroupToFrontEndItems) {
-			System.out.println(productGroupToFrontEnd.getPgid() + ", " + productGroupToFrontEnd.getNamePG());
+			System.out.println(productGroupToFrontEnd.getPgId() + ", " + productGroupToFrontEnd.getNamePG());
 			for (ShoppingIcon shoppingIcon : productGroupToFrontEnd.shoppingIcons) {
 				System.out.println("     " + shoppingIcon.toString());
 
@@ -290,19 +290,19 @@ public class ShoppingListService {
 		for (ShoppingItem shoppingItem : shoppingItems) {
 			System.out.println("start:"+shoppingItem);
 			/* alternativa */
-			ProductGroupToFrontEnd productGroupToFrontEndItem = productGroupToFrontEndItems.stream().filter(itr -> itr.getPgid().equals(shoppingItem.getPgid())).findFirst().orElse(null);
-			
+			ProductGroupToFrontEnd productGroupToFrontEndItem = productGroupToFrontEndItems.stream().filter(itr -> itr.getPgId().equals(shoppingItem.getPgid())).findFirst().orElse(null);
+
 			System.out.println("finisch finding:"+shoppingItem);
 
 			if (productGroupToFrontEndItem == null) { /* nebyla nalezena produktová skupina */
 				productGroupToFrontEndItems.add(new ProductGroupToFrontEnd(shoppingItem.getPgid(), shoppingItem.getNamePG(), new ArrayList<>()));
 				lastProductGropupId = (productGroupToFrontEndItems.size() > 0) ? productGroupToFrontEndItems.size() - 1 : 0;
 				productGroupToFrontEndItems.get(lastProductGropupId).shoppingIcons.add(new ShoppingIcon(1, false, false, shoppingItem));
-			} else if (productGroupToFrontEndItem.getPgid() > -1) { /* byla nalezena produktová skupina a není to produkt, tj id product group > 1 */
+			} else if (productGroupToFrontEndItem.getPgId() > -1) { /* byla nalezena produktová skupina a není to produkt, tj id product group > 1 */
 				lastProductGropupId = (productGroupToFrontEndItems.size() > 0) ? productGroupToFrontEndItems.size() - 1 : 0;
-				/* toto je chybné neboť přidává shopping item po poslední produktivé skupiny, aprávně by měl přidávat do příslušné produktové skupiny */
+				/* toto je chybné neboť přidává shopping item po poslední produktivé skupiny, správně by měl přidávat do příslušné produktové skupiny */
 				productGroupToFrontEndItems.get(lastProductGropupId).shoppingIcons.add(new ShoppingIcon(1, false, false, shoppingItem));
-			} else if (productGroupToFrontEndItem.getPgid() == -1) { /* jedná se o produkt */
+			} else if (productGroupToFrontEndItem.getPgId() == -1) { /* jedná se o produkt */
 				productGroupToFrontEndItems.add(new ProductGroupToFrontEnd(shoppingItem.getPgid(), shoppingItem.getNamePG(), new ArrayList<>()));
 				lastProductGropupId = (productGroupToFrontEndItems.size() > 0) ? productGroupToFrontEndItems.size() - 1 : 0;
 				productGroupToFrontEndItems.get(lastProductGropupId).shoppingIcons.add(new ShoppingIcon(1, false, false, shoppingItem));
@@ -315,7 +315,7 @@ public class ShoppingListService {
 		System.out.println("productGroupsToFrontEnd - nonOrderedInput");
 		System.out.println("---------------------------------------------------------------------------------");
 		for (ProductGroupToFrontEnd productGroupToFrontEnd : productGroupToFrontEndItems) {
-			System.out.println(productGroupToFrontEnd.getPgid() + ", " + productGroupToFrontEnd.getNamePG());
+			System.out.println(productGroupToFrontEnd.getPgId() + ", " + productGroupToFrontEnd.getNamePG());
 			for (ShoppingIcon shoppingIcon : productGroupToFrontEnd.shoppingIcons) {
 				System.out.println("     " + shoppingIcon.toString());
 

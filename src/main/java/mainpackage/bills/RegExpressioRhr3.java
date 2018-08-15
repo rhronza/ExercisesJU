@@ -1,4 +1,4 @@
-package mainpackage;
+package mainpackage.bills;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
