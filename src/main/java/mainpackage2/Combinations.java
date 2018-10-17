@@ -276,13 +276,9 @@ public class Combinations {
 		}
 	}
 
-	List<List<String>> inputLists = new ArrayList<>();
-	List<String> listChar = new ArrayList<>();
-	List<String> result = new ArrayList<>();
 
-	List<ForSelectionItem> forSelectionItems = new ArrayList<>();
 
-	List<List<Coordinates>> coordinatesCombinationResult = new ArrayList();
+//	List<List<Coordinates>> coordinatesCombinationResult = new ArrayList();
 
 	int order = 0;
 
@@ -291,37 +287,38 @@ public class Combinations {
 		/* ----------------------------------------------------------------------------- */
 		/* Zdrojem je List<List<Character>>, výsledek do List<String> */
 		/* ----------------------------------------------------------------------------- */
-//		 this.initExampleValues();
-//		 String EmptyString = "";
-//		 this.GeneratePermutations(inputLists, result, 0, EmptyString);
-//		
-//		 System.out.println("----------------------------------------------------------------");
-//		 System.out.println("KOMBINACE/PERMUTACE:");
-//		 System.out.println("----------------------------------------------------------------");
-//		 int i = 1;
-//		 for (String s : result) {
-//		 System.out.println("i=" + i + ": " + s);
-//		 i++;
-//		 }
-//		 System.out.println("----------------------------------------------------------------");
-//		 System.out.println("počet kombinací=" + result.size());
+		// this.initExampleValues();
+		// String EmptyString = "";
+		// this.GeneratePermutations(inputLists, result, 0, EmptyString);
+		//
+		// System.out.println("----------------------------------------------------------------");
+		// System.out.println("KOMBINACE/PERMUTACE:");
+		// System.out.println("----------------------------------------------------------------");
+		// int i = 1;
+		// for (String s : result) {
+		// System.out.println("i=" + i + ": " + s);
+		// i++;
+		// }
+		// System.out.println("----------------------------------------------------------------");
+		// System.out.println("počet kombinací=" + result.size());
 
 		/* ----------------------------------------------------------------------------- */
 		/* Zdrojem je ForSelectionItems, výsledek do Stringu */
 		/* ----------------------------------------------------------------------------- */
-		this.initForSelectionItems();
+		List<String> result = new ArrayList<>();
+		List<ForSelectionItem> forSelectionItems = this.initForSelectionItems();
 		String EmptyString = "";
 		this.GeneratePermutationsForSelectionItems(forSelectionItems, result, 0, EmptyString);
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("KOMBINACE/PERMUTACE:");
 		System.out.println("----------------------------------------------------------------");
 		int i = 1;
-		
+
 		List<Coordinates> cheapestPurchaseCoordinates = new ArrayList<>();
-		List<Coordinates> currentPurchaseCoordinates  = new ArrayList<>();
-		Float cheapestPurchase = null; 
-		float currentPurchase; 
-		
+		List<Coordinates> currentPurchaseCoordinates = new ArrayList<>();
+		Float cheapestPurchase = null;
+		float currentPurchase;
+
 		for (String s : result) {
 			System.out.println(" " + "i=" + i + ": " + s);
 			String[] cellCoordinatesExtrated = s.split("\\|");
@@ -339,18 +336,18 @@ public class Combinations {
 				cheapestPurchase = currentPurchase;
 				cheapestPurchaseCoordinates.clear();
 				cheapestPurchaseCoordinates.addAll(currentPurchaseCoordinates);
-			} 
+			}
 			i++;
 		}
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("počet kombinací=" + result.size());
-    	System.out.println("");
-    	System.out.println("Nejlevnější nákup= "+cheapestPurchase+" Kč");
-    	i=1;
+		System.out.println("");
+		System.out.println("Nejlevnější nákup= " + cheapestPurchase + " Kč");
+		i = 1;
+		/* nastavení isLarge */
 		for (Coordinates coordinates : cheapestPurchaseCoordinates) {
-			System.out.println(i+":"+forSelectionItems.get(coordinates.getR()).getShoppingIcons().get(coordinates.getC()).toString());
+			System.out.println(i + ":" + forSelectionItems.get(coordinates.getR()).getShoppingIcons().get(coordinates.getC()).toString());
 		}
-		
 
 		/* ----------------------------------------------------------------------------- */
 		/* Zdrojem je ForSelectionItems, výsledek do Coordinates */
@@ -485,7 +482,8 @@ public class Combinations {
 		return list;
 	}
 
-	private void initForSelectionItems() {
+	private List<ForSelectionItem> initForSelectionItems() {
+		List<ForSelectionItem> forSelectionItems = new  ArrayList<>();
 		forSelectionItems.add(new ForSelectionItem(0, 100, "Produktová skupina 100", new ArrayList<>()));
 		forSelectionItems.get(0).getShoppingIcons().add(new ShoppingIcon(0, 1, false, false, new ShoppingItem(100, "Produktová skupina 100", 23456, "Produkt 23456", 10f, 1, 1, 33.50f, 1, "")));
 		forSelectionItems.get(0).getShoppingIcons().add(new ShoppingIcon(1, 1, false, false, new ShoppingItem(100, "Produktová skupina 100", 23457, "Produkt 23457", 11f, 1, 1, 121.8f, 1, "")));
@@ -528,10 +526,12 @@ public class Combinations {
 		}
 		System.out.println("------------------------------------------------------------");
 		System.out.println("očekáváno kombinací:" + combinationExpected);
-
+		return forSelectionItems;
 	}
 
-	private void initExampleValues() {
+	private List<List<String>> initExampleValues() {
+		List<List<String>> inputLists = new ArrayList<>();
+		List<String> listChar = new ArrayList<>();
 		listChar.add("a");
 		listChar.add("b");
 		listChar.add("c");
@@ -568,6 +568,7 @@ public class Combinations {
 
 		}
 		System.out.println("----------------------------------------------------------------");
+		return inputLists;
 	}
 
 }

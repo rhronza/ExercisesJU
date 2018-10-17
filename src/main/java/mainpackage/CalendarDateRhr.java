@@ -54,6 +54,7 @@ public class CalendarDateRhr {
 		System.out.println("Calendar2: "+dateFormat2.format(cal.getTime()));
 		System.out.println("Calendar3: "+dateFormat3.format(cal.getTime()));
 		System.out.println("Calendar5: "+dateFormat5.format(cal.getTime()));
+		
 
 		cal.add(Calendar.MONTH,+1);
 		cal.add(Calendar.DAY_OF_MONTH,-1); 
